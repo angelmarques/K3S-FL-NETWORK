@@ -1,0 +1,11 @@
+version: "3.0"
+services:
+  fl-client-5001:
+    build: .
+    environment: 
+        CLIENT_URL: "http://127.0.0.1:5000"
+        SERVER_URL: "http://127.0.0.1:5000"
+    ports:
+      - "5001:5000"
+    volumes:
+      - /Users/angelmarques/tfg/federated-learning-network/datasets:/federated-learning-network/datasets
