@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+ name: serverdeployment
+spec:
+  selector: 
+    matchLabels:
+      role: serverip
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        role: serverip
+    spec:
+      containers:
+      - name: server-01 
+        image: dkr-dsg.ac.upc.edu/tfg_angel/fl-server
+        ports:
+        - containerPort: 5000
+      nodeName: dipet00
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: serviceserverip
+spec:
+  ports:
+  - port: 5000
+    targetPort: 5000
+  selector:
+    role: serverip
