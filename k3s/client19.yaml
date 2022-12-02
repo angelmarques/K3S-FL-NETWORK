@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: client6
+spec:
+  selector:
+    matchLabels:
+      role: client19ip
+  template:
+    metadata:
+      labels:
+        role: client19ip
+    spec:
+      containers:
+      - name: client19
+        image: dkr-dsg.ac.upc.edu/tfg_angel/fl-client
+        env:
+        - name: CLIENT_URL
+          value: 'http://10.43.231.160:5000'
+        - name: SERVER_URL
+          value: 'http://10.43.1.240:5000'
+        volumeMounts:
+        - mountPath: "/federated-learning-network/datasets"
+          name: dbclient-19
+        ports:
+        - containerPort: 5000
+      volumes:
+      - name: dbclient-19
+        hostPath:
+          path: /home/dipet
+      nodeName: dipet06
