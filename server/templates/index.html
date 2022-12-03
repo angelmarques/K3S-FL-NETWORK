@@ -46,7 +46,7 @@
                 </thead>
                 {%  for client_url,training_client in training_clients.items() %}
                     <tr>
-                        <td>{{ client_url }} <span class="badge {{ training_client.status }}">{{ training_client.status }}</span></td>
+                        <td>{{ client_url }} <span class="badge {{ training_client.status }}">{{ training_client.status }}</span> <a type="button" class="btn btn-warning" id="deleteClientButton" client-url= "{{ client_url }}" href="#"> Delete this client</a>   </td>
                     </tr>
                 {% endfor %}
             </table>

@@ -45,10 +45,10 @@ def create_app(test_config=None):
         server.register_client(request.form['client_url'])
         return Response(status=201)
 
-    @app.route('/client', methods=['DELETE'])
+    @app.route('/clientun', methods=['POST'])
     def unregister_client():
-        print('Request DELETE /client for client_url [', request.form['client_url'], ']')
-        server.unregister_client(request.form['client_url'])
+        print('Request POST /clientun for client_url [', request.json['client_url'], ']')
+        server.unregister_client(request.json['client_url'])
         return Response(status=200)
 
     @app.route('/model_params', methods=['PUT'])
