@@ -18,10 +18,9 @@ jobs:
     - name: build image and push to harbor
       uses: docker/build-push-action@v2
       with: 
-        dockerfile: ./server/Dockerfile
+        file: ./server/Dockerfile
         push: true
         tags: fl-server
-        tag_with_ref: true
-        tag_with_sha: true 
+         
        
 
