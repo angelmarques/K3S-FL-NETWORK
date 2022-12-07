@@ -1,17 +1,27 @@
 on: push
-name: integration
+name: server_integration
 jobs: 
   integration: 
-    name: deploy to cluster
+    name: deploy_server_to_cluster
     runs-on: ubuntu-latest
-    steps: 
-    - uses: actions/checkout@master
+    steps:
+    - name: Checkout repo 
+      uses: actions/checkout@master
+    
+    - name: Login to Harbor registry
+      uses: docker/login-actions@v2
+      with:
+        username: ${{ secrets.HARBOR_USERNAME }}
+        password: ${{ secrets.HARBOR_PASSWORD }}
+        repository: ${{ dkr-dsg.ac.upc.edu/harbor/tfg_angel }}
+    
     - name: build image and push to harbor
       uses: docker/build-push-action@v1
       with: 
-        username: ${{ secrets.HARBOR_USERNAME }}
-        password: ${{ secrets.HARBOR_PASSWORD }}
-        repository: ${{ dkr-dsg.ac.upc.edu/tfg_angel }}
+        context: /server
+        push: true
+        tags: fl-server:latest
         tag_with_ref: true
         tag_with_sha: true 
+       
 
