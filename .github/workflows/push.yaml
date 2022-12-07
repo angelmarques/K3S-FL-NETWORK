@@ -26,7 +26,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: myimage
-        path: /tmp/myimage.tar
+        path: /server/myimage.tar
 
   use:
     runs-on: ubuntu-latest
@@ -39,11 +39,11 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: myimage
-          path: /tmp
+          path: /server
 
       - name: Load Docker image
         run: |
-          docker load --input /tmp/myimage.tar
+          docker load --input /server/myimage.tar
           docker image ls -a
           docker tag fl-server dkr-dsg.ac.upc.edu/tfg_angel/flserver
           docker push dkr-dsg.ac.upc.edu/tfg_angel/fl-server
