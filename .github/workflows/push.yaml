@@ -20,7 +20,7 @@ jobs:
       with: 
         path: /server
         push: true
-        tags: fl-server:latest
+        tags: fl-server
         tag_with_ref: true
         tag_with_sha: true 
        
