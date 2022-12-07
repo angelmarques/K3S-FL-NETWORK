@@ -19,7 +19,7 @@ jobs:
       uses: docker/build-push-action@v2
       with: 
         file: ./server/Dockerfile
-        outputs: type=docker, dest= /server/myimage.tar
+        outputs: type=docker, dest= ./server/myimage.tar
         tag: fl-server:latest
 
     - name: Upload artifact
