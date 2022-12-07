@@ -19,7 +19,7 @@ jobs:
       uses: docker/build-push-action@v2
       with: 
         file: ./server/Dockerfile
-        load: true
+        outputs: type=oci, dest= /
         tag: fl-server
 
     - name: running tag manually
