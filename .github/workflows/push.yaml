@@ -16,7 +16,7 @@ jobs:
         registry: dkr-dsg.ac.upc.edu/harbor/tfg_angel
     
     - name: build image and push to harbor
-      uses: docker/build-push-action@v1
+      uses: docker/build-push-action@v2
       with: 
         dockerfile: ./server/Dockerfile
         push: true
