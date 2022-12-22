@@ -15,7 +15,8 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWD }}
 
     - name: build, tag and push image manually 
-      run: docker build -t angelmarques/flnetwork-registry:fl-server -f ./server/Dockerfile .
+      run: |
+           docker build -t angelmarques/flnetwork-registry:fl-server -f ./server/Dockerfile .
            docker push angelmarques/flnetwork-registry:fl-server
  
     
