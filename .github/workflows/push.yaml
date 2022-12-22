@@ -15,12 +15,9 @@ jobs:
         password: ${{ secrets.HARBOR_PASSWORD }}
         registry: dkr-dsg.ac.upc.edu/harbor/tfg_angel
     
-    - name: build image and push to harbor
-      uses: docker/build-push-action@v2
-      with: 
-        file: ./server/Dockerfile
-        push: true
-        tags: fl-server
+     - name: build, tag and push image manually
+       run: docker build -t dkr-dsg.ac.upc.edu/harbor/tfg_angel/fl-server:latest -f ./server/Dockerfile .
+            docker push dkr-dsg.ac.upc.edu/harbor/tfg_angel/fl-server:latest
     
 
          
