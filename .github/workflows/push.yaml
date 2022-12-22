@@ -16,7 +16,8 @@ jobs:
         registry: dkr-dsg.ac.upc.edu/harbor/tfg_angel
     
      - name: build, tag and push image manually
-       run: docker build -t dkr-dsg.ac.upc.edu/harbor/tfg_angel/fl-server:latest -f ./server/Dockerfile .
+       run: |
+            docker build -t dkr-dsg.ac.upc.edu/harbor/tfg_angel/fl-server:latest -f ./server/Dockerfile .
             docker push dkr-dsg.ac.upc.edu/harbor/tfg_angel/fl-server:latest
     
 
