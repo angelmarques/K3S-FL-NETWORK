@@ -14,8 +14,10 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWD }}
 
-    - name: build image and push to dockerhub
+    - name: build and tag image 
       run: docker build -t angelmarques/flnetwork-registry:fl-server -f ./server/Dockerfile .
+
+    - name: push to dockerhub
       run: docker push angelmarques/flnetwork-registry:fl-server 
  
     
