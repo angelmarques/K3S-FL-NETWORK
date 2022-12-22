@@ -14,15 +14,10 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWD }}
 
-    - name: build image and not push to dockerhub
-      uses: docker/build-push-action@v3
-      with: 
-        file: ./server/Dockerfile
-        push: true
-        tags: fl-server
-
-    - name: tag manually and push
-      run: echo 'done'
+    - name: build image and push to dockerhub
+      run: docker build -t angelmarques/flnetwork-registry:fl-server -f ./server/Dockerfile .
+      run: docker push angelmarques/flnetwork-registry:fl-server 
+ 
     
 
          
