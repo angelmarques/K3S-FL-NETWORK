@@ -18,11 +18,11 @@ jobs:
       uses: docker/build-push-action@v3
       with: 
         file: ./server/Dockerfile
-        push: false
+        push: true
         tags: fl-server
 
     - name: tag manually and push
-      run: echo 'Done'
+      run: echo 'done'
     
 
          
