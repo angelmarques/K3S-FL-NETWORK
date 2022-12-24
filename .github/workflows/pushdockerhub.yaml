@@ -16,7 +16,7 @@ jobs:
 
     - name: build, tag and push image manually 
       run: |
-           docker build -t angelmarques/flnetwork-registry:fl-server -f ./server/Dockerfile .
+           docker build -t angelmarques/flnetwork-registry:fl-server -f ./server/Dockerfile ./server
            docker push angelmarques/flnetwork-registry:fl-server
  
     

@@ -17,7 +17,7 @@ jobs:
     
     - name: build, tag and push image manually
       run: |
-            docker build -t dkr-dsg.ac.upc.edu/tfg_angel/fl-server:latest -f ./server/Dockerfile .
+            docker build -t dkr-dsg.ac.upc.edu/tfg_angel/fl-server:latest -f ./server/Dockerfile ./server
             docker push dkr-dsg.ac.upc.edu/tfg_angel/fl-server:latest
     
 
