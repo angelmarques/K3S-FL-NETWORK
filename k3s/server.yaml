@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: server-01 
-        image: dkr-dsg.ac.upc.edu/tfg_angel/fl-server
+        image: angelmarques/flnetwork-registry/fl-server:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
       nodeName: dipet00
