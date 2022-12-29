@@ -16,15 +16,15 @@ jobs:
 
     - name: build, tag and push image manually 
       run: |
-           docker build -t angelmarques/flnetwork-registry/fl-server:latest -f ./server/Dockerfile ./server
-           docker push angelmarques/flnetwork-registry/fl-server:latest
+           docker build -t angelmarques/flnetwork-registry:latest -f ./server/Dockerfile ./server
+           docker push angelmarques/flnetwork-registry:latest
 
     - name: deploy to cluster
       uses: steebchen/kubectl@master
       env: 
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}  
       with:
-        args: set image --record deployment.apps/serverdeployment server-01=angelmarques/flnetwork-registry/fl-server:latest
+        args: set image --record deployment.apps/serverdeployment server-01=angelmarques/flnetwork-registry:latest
 
     - name: verify deployment
       uses: steebchen/kubectl@master

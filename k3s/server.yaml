@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: server-01 
-        image: angelmarques/flnetwork-registry/fl-server:latest
+        image: angelmarques/flnetwork-registry:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
