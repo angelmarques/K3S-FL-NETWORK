@@ -18,7 +18,22 @@ jobs:
       run: |
            docker build -t angelmarques/flnetwork-registry:fl-server -f ./server/Dockerfile ./server
            docker push angelmarques/flnetwork-registry:fl-server
- 
+
+    - name: deploy to cluster
+      uses: steebchen/kubectl@master
+      env: 
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}  
+      with:
+        args: set image --record deployment.apps/serverdeployment server-01=angelmarques/flnetwork-registry:fl-server
+
+    - name: verify deployment
+      uses: steebchen/kubectl@master
+      env: 
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        KUBECTL_VERSION: "1.25.4"
+      with:
+        args: '"rollout status deployment.apps/serverdeployment"' 
+
     
 
          
