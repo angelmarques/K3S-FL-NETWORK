@@ -19,20 +19,20 @@ jobs:
            docker build -t angelmarques/flnetwork-registry:latest -f ./server/Dockerfile ./server
            docker push angelmarques/flnetwork-registry:latest
 
-    - uses: actions/checkout@master
-    - name: deploy to cluster
-      uses: steebchen/kubectl@v2.0.0
-      with: 
-        config: ${{ secrets.KUBE_CONFIG_DATA }}
-        command: set image --record deployment.apps/serverdeployment server-01=angelmarques/flnetwork-registry:latest
+   # - uses: actions/checkout@master
+   # - name: deploy to cluster
+   #   uses: steebchen/kubectl@v2.0.0
+   #   with: 
+   #     config: ${{ secrets.KUBE_CONFIG_DATA }}
+   #     command: set image --record deployment.apps/serverdeployment server-01=angelmarques/flnetwork-registry:latest
     
-    - name: verify deployment
-      uses: steebchen/kubectl@v2.0.0
-      with:
-        config: ${{ secrets.KUBE_CONFIG_DATA }}
-        version: v1.26.0
-        binaries-url: "https://github.com/k3s-io/k3s/releases/download/v1.26.0%2Bk3s1/k3s"
-        command: rollout status deployment.apps/serverdeployment 
+   # - name: verify deployment
+   #   uses: steebchen/kubectl@v2.0.0
+   #   with:
+   #     config: ${{ secrets.KUBE_CONFIG_DATA }}
+   #     version: v1.26.0
+   #     binaries-url: "https://github.com/k3s-io/k3s/releases/download/v1.26.0%2Bk3s1/k3s"
+   #     command: rollout status deployment.apps/serverdeployment 
 
     
 
