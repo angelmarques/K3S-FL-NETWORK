@@ -19,6 +19,8 @@ jobs:
       run: |
             docker build -t dkr-dsg.ac.upc.edu/tfg_angel/fl-server:latest -f ./server/Dockerfile ./server
             docker push dkr-dsg.ac.upc.edu/tfg_angel/fl-server:latest
+            docker build -t dkr-dsg.ac.upc.edu/tfg_angel/fl-client:latest -f ./client/Dockerfile ./client
+            docker push dkr-dsg.ac.upc.edu/tfg_angel/fl-client:latest
     
 
          
