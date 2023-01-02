@@ -3,10 +3,9 @@ from os import environ
 
 DEFAULT_SERVER_URL = 'http://192.168.86.37:5000'
 GLOBAL_TMP_PATH = '/tmp'
-#GLOBAL_DATASETS = '../../../datasets'
+GLOBAL_DATASETS = '/home/dipet'
 
-GLOBAL_TMP_PATH = None
-GLOBAL_DATASETS = None # inside there is chest_xray folder
+
 if environ.get('CLIENT_URL') == "http://192.168.86.37:5001":
     print("I'm client 1")
     GLOBAL_TMP_PATH = '/tmp'
@@ -25,5 +24,5 @@ if environ.get('CLIENT_URL') == "http://192.168.86.37:5004":
     GLOBAL_DATASETS = '/Users/angelmarques/tfg/federated-learning-network/datasets' # inside there is chest_xray folder
 
 
-GLOBAL_DATASETS = '/Users/angelmarques/tfg/federated-learning-network/datasets'
+
 
