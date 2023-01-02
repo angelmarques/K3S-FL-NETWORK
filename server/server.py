@@ -4,6 +4,8 @@ import aiohttp
 import torch
 import requests
 
+from kubernetes import client, config
+
 import numpy as np
 
 from .utils import model_params_to_request_params
@@ -21,6 +23,8 @@ class Server:
         self.init_params()
         self.training_clients = {}
         self.status = ServerStatus.IDLE
+        config.load_kube_config()
+        self.v1 = client.CoreV1Api()
 
     def init_params(self):
         if self.mnist_model_params is None:
@@ -133,10 +137,32 @@ class Server:
             self.training_clients.get(client_url).status = ClientTrainingStatus.IDLE
         sys.stdout.flush()
 
+    def delete_deployment(api, client_url):
+        # Delete deployment
+        deploymentname= "no_name"
+        match client_url:
+            case "http://10.43.130.245:5000":
+                deploymentname= "client1"
+            case "http://10.43.29.252:5000":
+                deploymentname= "client2"
+            case "http://10.43.138.229:5000":
+                deploymentname= "client3"
+            case "http://10.43.216.86:5000":
+                deploymentname= "client5"
+            case "http://10.43.159.212:5000":
+                deploymentname= "client6"
+
+        resp = api.delete_namespaced_deployment(
+        name=deploymentname,
+        namespace="default"
+        )
+        print("\n[INFO] deployment deleted.")
+
     def unregister_client(self, client_url):
         print('Unregistering client [', client_url, ']')
         try:
             self.training_clients.pop(client_url)
+            delete_deployment(v1,client_url)
             print('Client [', client_url, '] unregistered successfully')
         except KeyError:
             print('Client [', client_url, '] is not registered yet')
