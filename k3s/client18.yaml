@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: client18
-        image: dkr-dsg.ac.upc.edu/tfg_angel/fl-client
+        image: dkr-dsg.ac.upc.edu/tfg_angel/fl-client:latest
         env:
         - name: CLIENT_URL
           value: 'http://10.43.3.246:5000'
