@@ -91,6 +91,7 @@ class Server:
             self.status = ServerStatus.UPDATING_MODEL_PARAMS
             if len (self.training_clients) == 0:
                 print ('No clients working, no updates')
+                self.status = ServerStatus.IDLE
             elif training_type == TrainingType.MNIST:
                 received_weights = []
                 received_biases = []
