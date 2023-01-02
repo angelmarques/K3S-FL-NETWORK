@@ -64,7 +64,7 @@ class Server:
         try: 
             async with aiohttp.ClientSession() as session:
                 training_client.status = ClientTrainingStatus.TRAINING_REQUESTED
-                async with session.post(request_url, json=request_body, timeout=10) as response:
+                async with session.post(request_url, json=request_body, timeout=120) as response:
                     if response.status != 200:
                         print('Error requesting training to client', training_client.client_url)
                         training_client.status = ClientTrainingStatus.TRAINING_REQUEST_ERROR
