@@ -3,7 +3,7 @@ from os import environ
 
 DEFAULT_SERVER_URL = 'http://192.168.86.37:5000'
 GLOBAL_TMP_PATH = '/tmp'
-GLOBAL_DATASETS = '/home/dipet'
+GLOBAL_DATASETS = '/federated-learning-network/datasets'
 
 
 if environ.get('CLIENT_URL') == "http://192.168.86.37:5001":
