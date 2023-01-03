@@ -23,7 +23,7 @@ class Server:
         self.init_params()
         self.training_clients = {}
         self.status = ServerStatus.IDLE
-        config.load_kube_config()
+        config.load_incluster_config()
         self.v1 = client.CoreV1Api()
 
     def init_params(self):
