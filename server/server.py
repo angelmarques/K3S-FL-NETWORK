@@ -145,17 +145,30 @@ class Server:
     def delete_deployment(api, client_url):
         # Delete deployment
         deploymentname= "no_name"
-        match client_url:
-            case "http://10.43.130.245:5000":
-                deploymentname= "client1"
-            case "http://10.43.29.252:5000":
+        #match client_url:
+        #    case "http://10.43.130.245:5000":
+        #        deploymentname= "client1"
+        #    case "http://10.43.29.252:5000":
+        #        deploymentname= "client2"
+        #    case "http://10.43.138.229:5000":
+        #        deploymentname= "client3"
+        #    case "http://10.43.216.86:5000":
+        #        deploymentname= "client5"
+        #    case "http://10.43.159.212:5000":
+        #        deploymentname= "client6"
+
+        if client_url == "http://10.43.130.245:5000":
+            deploymentname= "client1"
+            elif client_url == "http://10.43.29.252:5000":
                 deploymentname= "client2"
-            case "http://10.43.138.229:5000":
-                deploymentname= "client3"
-            case "http://10.43.216.86:5000":
-                deploymentname= "client5"
-            case "http://10.43.159.212:5000":
-                deploymentname= "client6"
+                elif client_url == "http://10.43.138.229:5000":
+                    deploymentname= "client3"
+                    elif client_url == "http://10.43.216.86:5000":
+                        deploymentname= "client5" 
+                        elif client_url == "http://10.43.159.212:5000":
+                            deploymentname= "client6"
+
+
 
         resp = api.delete_namespaced_deployment(
         name=deploymentname,
