@@ -120,7 +120,8 @@ class Server:
                     new_weights = np.stack(received_weights).mean(0)
                     self.chest_x_ray_model_params = new_weights
                     print('Model weights for', TrainingType.CHEST_X_RAY_PNEUMONIA, 'updated in central model')
-                else print('Model weights for', TrainingType.CHEST_X_RAY_PNEUMONIA, 'werent updated in central model as werent received')
+                else:
+                    print('Model weights for', TrainingType.CHEST_X_RAY_PNEUMONIA, 'werent updated in central model as werent received')
             self.status = ServerStatus.IDLE
         sys.stdout.flush()
 
