@@ -159,14 +159,14 @@ class Server:
 
         if client_url == "http://10.43.130.245:5000":
             deploymentname= "client1"
-            elif client_url == "http://10.43.29.252:5000":
-                deploymentname= "client2"
-                elif client_url == "http://10.43.138.229:5000":
-                    deploymentname= "client3"
-                    elif client_url == "http://10.43.216.86:5000":
-                        deploymentname= "client5" 
-                        elif client_url == "http://10.43.159.212:5000":
-                            deploymentname= "client6"
+        elif client_url == "http://10.43.29.252:5000":
+            deploymentname= "client2"
+        elif client_url == "http://10.43.138.229:5000":
+            deploymentname= "client3"
+        elif client_url == "http://10.43.216.86:5000":
+            deploymentname= "client5" 
+        elif client_url == "http://10.43.159.212:5000":
+            deploymentname= "client6"
 
 
 
