@@ -142,7 +142,7 @@ class Server:
             self.training_clients.get(client_url).status = ClientTrainingStatus.IDLE
         sys.stdout.flush()
 
-    def delete_deployment(api, client_url):
+    def delete_deployment(self, api, client_url):
         # Delete deployment
         deploymentname= "no_name"
         #match client_url:
@@ -174,13 +174,14 @@ class Server:
         name=deploymentname,
         namespace="default"
         )
+        self.v1 = client.CoreV1Api()
         print("\n[INFO] deployment deleted.")
 
     def unregister_client(self, client_url):
         print('Unregistering client [', client_url, ']')
         try:
             self.training_clients.pop(client_url)
-            delete_deployment(v1,client_url)
+            self.delete_deployment(v1,client_url)
             print('Client [', client_url, '] unregistered successfully')
         except KeyError:
             print('Client [', client_url, '] is not registered yet')
