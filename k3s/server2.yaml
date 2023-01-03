@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
- name: serverdeployment
+ name: serverdeployment2
 spec:
   selector: 
     matchLabels:
-      role: serverip
+      role: serverip2
   replicas: 1
   template:
     metadata:
       labels:
-        role: serverip
+        role: serverip2
     spec:
       containers:
-      - name: server-01 
+      - name: server-02
         image: dkr-dsg.ac.upc.edu/tfg_angel/fl-server:latest
         #imagePullPolicy: Always
         ports:
@@ -24,10 +24,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: serviceserverip
+  name: serviceserverip2
 spec:
   ports:
   - port: 5000
     targetPort: 5000
   selector:
-    role: serverip
+    role: serverip2

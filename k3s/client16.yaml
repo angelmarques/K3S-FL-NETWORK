@@ -16,9 +16,9 @@ spec:
         image: dkr-dsg.ac.upc.edu/tfg_angel/fl-client:latest
         env:
         - name: CLIENT_URL
-          value: 'http://10.43.162.196:5000'
+          value: 'http://10.43.138.229:5000'
         - name: SERVER_URL
-          value: 'http://10.43.1.240:5000'
+          value: 'http://10.43.194.70:5000'
         volumeMounts:
         - mountPath: "/federated-learning-network/datasets"
           name: dbclient-16
