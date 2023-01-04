@@ -33,12 +33,13 @@ class Server:
             self.mnist_model_params = weights, bias
 
     async def start_training(self, training_type):
-        if self.status != ServerStatus.IDLE:
-            print('Server is not ready for training yet, status:', self.status)
+        if len(self.training_clients) == 0:
+            print("There aren't any clients registered in the system, nothing to do yet, setting Server to IDLE")
+            self.status = ServerStatus.IDLE
+        elif self.status != ServerStatus.IDLE:
+            print('Server is not ready for training yet, status and current clients:', self.status)
             for training_client in self.training_clients.values():
                 print(training_client)
-        elif len(self.training_clients) == 0:
-            print("There aren't any clients registered in the system, nothing to do yet")
         else:
             request_body = {}
             federated_learning_config = None
@@ -116,8 +117,9 @@ class Server:
                         received_weights.append(training_client.model_params)
                     elif training_client.status == ClientTrainingStatus.TRAINING_REQUEST_ERROR:
                         training_client.status = ClientTrainingStatus.IDLE
+                        print('Putting IDLE status to client as there was error requesting training to client', training_client.client_url)
                 if len (received_weights) > 0:
-                    new_weights = np.stack(received_weights).mean(0)
+                    new_weights = torch.stack(received_weights).mean(0)
                     self.chest_x_ray_model_params = new_weights
                     print('Model weights for', TrainingType.CHEST_X_RAY_PNEUMONIA, 'updated in central model')
                 else:
