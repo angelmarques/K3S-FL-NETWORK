@@ -181,7 +181,7 @@ class Server:
         print('Unregistering client [', client_url, ']')
         try:
             self.training_clients.pop(client_url)
-            self.delete_deployment(v1,client_url)
+            self.delete_deployment(self.v1,client_url)
             print('Client [', client_url, '] unregistered successfully')
         except KeyError:
             print('Client [', client_url, '] is not registered yet')
