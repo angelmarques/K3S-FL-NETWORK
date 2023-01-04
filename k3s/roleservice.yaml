@@ -1,0 +1,19 @@
+apiVersion: rbac.authorization.k8s.io/v1 
+kind: ClusterRole 
+metadata:
+  namespace: default
+  name: deployments-editor
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - deployment
+      - deployments
+    verbs: 
+      - get 
+      - list 
+      - watch
+      - create 
+      - update
+      - patch 
+      - delete

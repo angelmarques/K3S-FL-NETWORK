@@ -11,14 +11,15 @@ spec:
       labels:
         role: client14ip
     spec:
+      serviceAccountName: build-robot
       containers:
       - name: client14
-        image: dkr-dsg.ac.upc.edu/tfg_angel/fl-client:latest
+        image: angelmarques/flnetwork-registry2:latest
         env:
         - name: CLIENT_URL
           value: 'http://10.43.130.245:5000'
         - name: SERVER_URL
-          value: 'http://10.43.194.70:5000'
+          value: 'http://10.43.131.165:5000'
         volumeMounts:      
         - mountPath: "/federated-learning-network/datasets"
           name: dbclient-14

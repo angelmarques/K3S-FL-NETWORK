@@ -12,9 +12,10 @@ spec:
       labels:
         role: serverip
     spec:
+      serviceAccountName: build-robot
       containers:
       - name: server-01 
-        image: dkr-dsg.ac.upc.edu/tfg_angel/fl-server:latest
+        image: angelmarques/flnetwork-registry:latest
         #imagePullPolicy: Always
         ports:
         - containerPort: 5000
