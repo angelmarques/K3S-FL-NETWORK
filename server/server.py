@@ -24,7 +24,7 @@ class Server:
         self.training_clients = {}
         self.status = ServerStatus.IDLE
         config.load_incluster_config()
-        self.v1 = client.CoreV1Api()
+        self.v1 = client.AppsV1Api()
 
     def init_params(self):
         if self.mnist_model_params is None:
@@ -174,7 +174,7 @@ class Server:
         name=deploymentname,
         namespace="default"
         )
-        self.v1 = client.CoreV1Api()
+        self.v1 = client.AppsV1Api()
         print("\n[INFO] deployment deleted.")
 
     def unregister_client(self, client_url):
