@@ -55,7 +55,7 @@ class Server:
             request_body['batch_size'] = federated_learning_config.batch_size
             request_body['training_type'] = training_type
             print('There are', len(self.training_clients), 'clients registered')
-            tasks = set()
+            tasks = []
             for training_client in self.training_clients.values():
                 tasks.add(asyncio.ensure_future(self.do_training_client_request(training_type, training_client, request_body)))
             print('Requesting training to clients...')
@@ -114,14 +114,14 @@ class Server:
                 for training_client in self.training_clients.values():
                     if training_client.status == ClientTrainingStatus.TRAINING_FINISHED:
                         training_client.status = ClientTrainingStatus.IDLE
-                        received_weights.append(training_client.model_params[0])
+                        received_weights.append(training_client.model_params)
                     elif training_client.status == ClientTrainingStatus.TRAINING_REQUEST_ERROR:
                         training_client.status = ClientTrainingStatus.IDLE
                         print('Putting IDLE status to client as there was error requesting training to client', training_client.client_url)
                 if len (received_weights) > 0:
                     new_weights = np.stack(received_weights).mean(0)
                     self.chest_x_ray_model_params = new_weights
-                    print('Model weights for', TrainingType.CHEST_X_RAY_PNEUMONIA, 'updated in central model')
+                    print('Model weights for', TrainingType.CHEST_X_RAY_PNEUMONIA, 'updated in central model and these are:')
                 else:
                     print('Model weights for', TrainingType.CHEST_X_RAY_PNEUMONIA, 'werent updated in central model as werent received')
             self.status = ServerStatus.IDLE
