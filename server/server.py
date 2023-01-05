@@ -114,12 +114,12 @@ class Server:
                 for training_client in self.training_clients.values():
                     if training_client.status == ClientTrainingStatus.TRAINING_FINISHED:
                         training_client.status = ClientTrainingStatus.IDLE
-                        received_weights.append(training_client.model_params)
+                        received_weights.append(training_client.model_params[0])
                     elif training_client.status == ClientTrainingStatus.TRAINING_REQUEST_ERROR:
                         training_client.status = ClientTrainingStatus.IDLE
                         print('Putting IDLE status to client as there was error requesting training to client', training_client.client_url)
                 if len (received_weights) > 0:
-                    new_weights = np.stack(received_weights[0]).mean(0)
+                    new_weights = np.stack(received_weights).mean(0)
                     self.chest_x_ray_model_params = new_weights
                     print('Model weights for', TrainingType.CHEST_X_RAY_PNEUMONIA, 'updated in central model')
                 else:
