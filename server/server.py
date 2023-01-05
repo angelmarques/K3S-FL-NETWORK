@@ -57,7 +57,7 @@ class Server:
             print('There are', len(self.training_clients), 'clients registered')
             tasks = []
             for training_client in self.training_clients.values():
-                tasks.add(asyncio.ensure_future(self.do_training_client_request(training_type, training_client, request_body)))
+                tasks.append(asyncio.ensure_future(self.do_training_client_request(training_type, training_client, request_body)))
             print('Requesting training to clients...')
             self.status = ServerStatus.CLIENTS_TRAINING
             await asyncio.gather(*tasks)
