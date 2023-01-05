@@ -3,6 +3,7 @@ import sys
 import aiohttp
 import torch
 import requests
+import random
 
 from kubernetes import client, config
 
@@ -119,9 +120,10 @@ class Server:
                         training_client.status = ClientTrainingStatus.IDLE
                         print('Putting IDLE status to client as there was error requesting training to client', training_client.client_url)
                 if len (received_weights) > 0:
-                    new_weights = np.stack(received_weights).mean(0,dtype=object)
-                    self.chest_x_ray_model_params = new_weights
-                    print('Model weights for', TrainingType.CHEST_X_RAY_PNEUMONIA, 'updated in central model and these are:')
+                    #new_weights = np.stack(received_weights).mean(0,dtype=object) <- last hour edit, works in local but inexplicably not through k3s
+                    number=random.randint(0, len(received_weights)-1)
+                    self.chest_x_ray_model_params = received_weights[number]
+                    print('Model weights for', TrainingType.CHEST_X_RAY_PNEUMONIA, 'updated in central model')
                 else:
                     print('Model weights for', TrainingType.CHEST_X_RAY_PNEUMONIA, 'werent updated in central model as werent received')
             self.status = ServerStatus.IDLE

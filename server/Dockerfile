@@ -16,7 +16,7 @@ RUN pip install torch torchvision \
 && pip install python-dotenv \
 && pip install aiohttp[speedups] \
 && pip install flask \
-&& pip install kubernetes
+&& pip install kubernetes 
 
 RUN apt-get purge -y --auto-remove build-essential
 
