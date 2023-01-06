@@ -18,8 +18,8 @@ jobs:
       run: |
            docker build -t angelmarques/flnetwork-registry:latest -f ./server/Dockerfile ./server
            docker push angelmarques/flnetwork-registry:latest
-           docker build -t angelmarques/flnetwork-registry2:latest -f ./client/Dockerfile ./client
-           docker push angelmarques/flnetwork-registry2:latest
+           #docker build -t angelmarques/flnetwork-registry2:latest -f ./client/Dockerfile ./client
+           #docker push angelmarques/flnetwork-registry2:latest
 
    # - uses: actions/checkout@master
    # - name: deploy to cluster
