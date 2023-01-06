@@ -16,6 +16,7 @@ RUN pip install torch torchvision \
 && pip install fastai \
 && pip install python-dotenv \
 && pip install aiohttp[speedups] \
+&& pip install matplotlib \
 && pip install flask
 
 RUN apt-get purge -y --auto-remove build-essential

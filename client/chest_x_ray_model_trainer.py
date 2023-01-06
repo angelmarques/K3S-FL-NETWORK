@@ -4,6 +4,8 @@ import random
 import shutil
 import tempfile
 
+import matplotlib.pyplot as plt
+
 from .config import GLOBAL_TMP_PATH, GLOBAL_DATASETS
 from tensorflow import keras
 from tensorflow.keras.layers import Dense, Flatten, Conv2D, MaxPool2D
@@ -42,12 +44,20 @@ class ChestXRayModelTrainer:
         self.__create_temp_dataset_folder()
         train_batches, valid_batches = self.__load_datasets()
 
-        model.fit(x=train_batches,
+        historial=model.fit(x=train_batches,
                   steps_per_epoch=10,
                   epochs=self.client_config.epochs,
                   validation_data=valid_batches,
                   validation_steps=5,
                   verbose=2)
+
+        plt.xlabel(" #epochs")
+        plt.ylabel("Loss ")
+        plt.plot (historial.history["loss"])
+
+        plt.xlabel(" #epochs")
+        plt.ylabel("accuracy ")
+        plt.plot (historial.history["accuracy"])
 
         self.__clean_temp_dataset_folder()
         return model.get_weights()

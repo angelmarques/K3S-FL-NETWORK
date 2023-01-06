@@ -35,7 +35,7 @@ def request_params_to_model_params(training_type, request_data):
             for weights in weights_received:
                 numpy_weights_array = np.array(weights)
                 print('model weights SHAPE:', numpy_weights_array.shape)
-                weights_array.append(np.array(weights))
+                weights_array.append(np.array(weights))  
             model_params = weights_array
         else:
             print('No weights found in the request')

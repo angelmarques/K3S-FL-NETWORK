@@ -49,7 +49,7 @@ class Server:
                 federated_learning_config = FederatedLearningConfig(learning_rate=1., epochs=20, batch_size=256)
             elif training_type == TrainingType.CHEST_X_RAY_PNEUMONIA:
                 request_body = model_params_to_request_params(training_type, self.chest_x_ray_model_params)
-                federated_learning_config = FederatedLearningConfig(learning_rate=0.0001, epochs=1, batch_size=2)
+                federated_learning_config = FederatedLearningConfig(learning_rate=0.0001, epochs=12, batch_size=2)
 
             request_body['learning_rate'] = federated_learning_config.learning_rate
             request_body['epochs'] = federated_learning_config.epochs
@@ -120,9 +120,10 @@ class Server:
                         training_client.status = ClientTrainingStatus.IDLE
                         print('Putting IDLE status to client as there was error requesting training to client', training_client.client_url)
                 if len (received_weights) > 0:
-                    #new_weights = np.stack(received_weights).mean(0,dtype=object) <- last hour edit, works in local but inexplicably not through k3s
+                    #new_weights = np.stack(received_weights).mean(0)# <- last hour edit, works in local but inexplicably not through k3s
                     number=random.randint(0, len(received_weights)-1)
                     self.chest_x_ray_model_params = received_weights[number]
+                    #self.chest_x_ray_model_params = new_weights
                     print('Model weights for', TrainingType.CHEST_X_RAY_PNEUMONIA, 'updated in central model')
                 else:
                     print('Model weights for', TrainingType.CHEST_X_RAY_PNEUMONIA, 'werent updated in central model as werent received')
