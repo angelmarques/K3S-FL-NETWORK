@@ -49,7 +49,7 @@ class Server:
                 federated_learning_config = FederatedLearningConfig(learning_rate=1., epochs=20, batch_size=256)
             elif training_type == TrainingType.CHEST_X_RAY_PNEUMONIA:
                 request_body = model_params_to_request_params(training_type, self.chest_x_ray_model_params)
-                federated_learning_config = FederatedLearningConfig(learning_rate=0.0001, epochs=35, batch_size=2)
+                federated_learning_config = FederatedLearningConfig(learning_rate=0.0001, epochs=1, batch_size=2)
 
             request_body['learning_rate'] = federated_learning_config.learning_rate
             request_body['epochs'] = federated_learning_config.epochs
@@ -70,7 +70,7 @@ class Server:
         try: 
             async with aiohttp.ClientSession() as session:
                 training_client.status = ClientTrainingStatus.TRAINING_REQUESTED
-                async with session.post(request_url, json=request_body, timeout=150000) as response:
+                async with session.post(request_url, json=request_body, timeout=240) as response:
                     if response.status != 200:
                         print('Error requesting training to client', training_client.client_url)
                         training_client.status = ClientTrainingStatus.TRAINING_REQUEST_ERROR
